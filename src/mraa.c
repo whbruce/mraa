@@ -28,6 +28,8 @@
 #include <sched.h>
 #include <string.h>
 
+#define DEBUG
+
 #include "mraa_internal.h"
 #include "intel_galileo_rev_d.h"
 #include "intel_galileo_rev_g.h"
@@ -92,6 +94,8 @@ mraa_init()
                 platform_type = MRAA_INTEL_EDISON_FAB_C;
             } else if (strncmp(line, "DE3815", 6) == 0) {
                 platform_type = MRAA_INTEL_DE3815;
+            } else if (strncmp(line, "NOTEBOOK", 8) == 0) {
+                platform_type = MRAA_INTEL_MINNOWBOARD_MAX;
             } else {
                 platform_type = MRAA_INTEL_GALILEO_GEN1;
             }
