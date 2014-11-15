@@ -56,9 +56,10 @@ mraa_gpio_context
 mraa_gpio_init(int pin)
 {
     int pinm = mraa_setup_gpio(pin);
-    if (pinm < 0)
+    if (pinm < 0) {
+        syslog(LOG_CRIT, "gpio: mraa_setup_gpio(%d) returned error %d", pin, pinm);
         return NULL;
-
+    }
     mraa_gpio_context r = mraa_gpio_init_raw(pinm);
     r->phy_pin = pin;
 
