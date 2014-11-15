@@ -30,7 +30,8 @@ extern "C" {
 
 #include "mraa_internal.h"
 
-#define MRAA_INTEL_MINNOW_MAX_PINCOUNT 18
+// +1 as pins are "1 indexed"
+#define MRAA_INTEL_MINNOW_MAX_PINCOUNT (26 + 1)
 
 mraa_board_t*
 mraa_intel_minnow_max();
