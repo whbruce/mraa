@@ -74,8 +74,12 @@ mraa_intel_minnow_max()
     mraa_set_pininfo(b, 11, "SPI_CLK",  (mraa_pincapabilities_t){1,1,0,0,0,0,0,1}, 223);
     mraa_set_pininfo(b, 12, "UART1_RT", (mraa_pincapabilities_t){1,1,0,0,0,0,0,1}, 226);
     mraa_set_pininfo(b, 13, "I2C_SCL",  (mraa_pincapabilities_t){1,1,0,0,0,1,0,0}, 243);
+    b->pins[13].i2c.pinmap = 1;
+    b->pins[13].i2c.mux_total = 0;
     mraa_set_pininfo(b, 14, "I2S_CLK",  (mraa_pincapabilities_t){1,1,0,0,0,0,0,0}, 216);
     mraa_set_pininfo(b, 15, "I2C_SDA",  (mraa_pincapabilities_t){1,1,0,0,0,1,0,0}, 242);
+    b->pins[15].i2c.pinmap = 1;
+    b->pins[15].i2c.mux_total = 0;
     mraa_set_pininfo(b, 16, "I2S_FRM",  (mraa_pincapabilities_t){1,1,0,0,0,0,0,0}, 217);
     mraa_set_pininfo(b, 17, "UART2_TX", (mraa_pincapabilities_t){1,1,0,0,0,0,0,1}, 229);
     mraa_set_pininfo(b, 18, "I2S_DO",   (mraa_pincapabilities_t){1,1,0,0,0,0,0,0}, 219);
@@ -89,8 +93,14 @@ mraa_intel_minnow_max()
     mraa_set_pininfo(b, 26, "IBL_8254", (mraa_pincapabilities_t){1,1,0,0,0,0,0,0}, 208);
 
     //BUS DEFINITIONS
-    b->i2c_bus_count = 1;
+    b->i2c_bus_count = 9;
+    int ici;
+    for (ici = 0; ici < 9; ici++) {
+        b->i2c_bus[ici].bus_id = -1;
+    }
     b->def_i2c_bus = 0;
+    // helpfully, all minnowboard max docs refer to i2c #6 but this is actually
+    // mapped to /dev/i2c-0
     b->i2c_bus[0].bus_id = 0;
     b->i2c_bus[0].sda = 15;
     b->i2c_bus[0].scl = 13;
