@@ -25,6 +25,7 @@ endif ()
 
 set_target_properties (${SWIG_MODULE_python-mraa_REAL_NAME} PROPERTIES
   OUTPUT_NAME _mraa
+  SKIP_BUILD_RPATH TRUE
   COMPILE_FLAGS "${CMAKE_C_FLAGS} -DSWIGPYTHON=${SWIG_FOUND}"
 )
 
