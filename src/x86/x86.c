@@ -38,6 +38,7 @@
 #include "x86/intel_cherryhills.h"
 #include "x86/up.h"
 #include "x86/intel_gt_tuchuck.h"
+#include "x86/intel_cht_cr.h"
 
 mraa_platform_t
 mraa_x86_platform()
@@ -93,6 +94,9 @@ mraa_x86_platform()
             } else if (strncasecmp(line, "SDS", 3) == 0) {
                 platform_type = MRAA_INTEL_GT_TUCHUCK;
                 plat = mraa_gt_tuchuck_board();
+            } else if (strncasecmp(line, "Cherry Trail Tablet", 19) == 0) {
+                platform_type = MRAA_INTEL_CHT_CR;
+                plat = mraa_intel_cht_cr();
             } else {
                 syslog(LOG_ERR, "Platform not supported, not initialising");
                 platform_type = MRAA_UNKNOWN_PLATFORM;

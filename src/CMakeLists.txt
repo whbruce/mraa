@@ -42,6 +42,7 @@ set (mraa_LIB_X86_SRCS_NOAUTO
   ${PROJECT_SOURCE_DIR}/src/x86/intel_cherryhills.c
   ${PROJECT_SOURCE_DIR}/src/x86/up.c
   ${PROJECT_SOURCE_DIR}/src/x86/intel_gt_tuchuck.c
+  ${PROJECT_SOURCE_DIR}/src/x86/intel_cht_cr.c
 )
 
 message (STATUS "INFO - Adding support for platform ${MRAAPLATFORMFORCE}")
