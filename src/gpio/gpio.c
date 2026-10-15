@@ -80,8 +80,10 @@ mraa_gpio_init_internal(mraa_adv_func_t* func_table, int pin)
 
     if (IS_FUNC_DEFINED(dev, gpio_init_internal_replace)) {
         status = dev->advance_func->gpio_init_internal_replace(dev, pin);
-        if (status == MRAA_SUCCESS)
+        if (status == MRAA_SUCCESS) {
+            printf("gpio_init_internal_replace %d -> %d\n", pin, dev->pin);
             return dev;
+        }
         else
             goto init_internal_cleanup;
     }

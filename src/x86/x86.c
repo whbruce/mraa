@@ -25,6 +25,8 @@
 #include "x86/iei_tank.h"
 #include "x86/intel_adlink_lec_al.h"
 #include "x86/up_xtreme.h"
+#include "x86/dell_egw_3200.h"
+#include "x86/premio.h"
 
 mraa_platform_t
 mraa_x86_platform()
@@ -42,7 +44,7 @@ mraa_x86_platform()
         if (getline(&line, &len, fh) != -1) {
             // Sanitize input by terminating at any of possible end of line chars
             line[strcspn(line, "\r\n")] = 0;
-
+            printf("Platform: %s\n", line);
             if (strncmp(line, "GalileoGen2", strlen("GalileoGen2") + 1) == 0 ||
                 strncmp(line, "SIMATIC IOT2000", strlen("SIMATIC IOT2000") + 1) == 0) {
                 platform_type = MRAA_INTEL_GALILEO_GEN2;
@@ -96,12 +98,21 @@ mraa_x86_platform()
             } else if ((strncasecmp(line, "LEC-ALAI", strlen("LEC-ALAI") + 1) == 0) ) {
                 platform_type = MRAA_ADLINK_LEC_AL;
                 plat = mraa_lec_al_board();
-	    } else if ((strncasecmp(line, "LEC-AL", strlen("LEC-AL") + 1) == 0) ) {
+	        } else if ((strncasecmp(line, "LEC-AL", strlen("LEC-AL") + 1) == 0) ) {
                 platform_type = MRAA_ADLINK_LEC_AL;
                 plat = mraa_lec_al_board();
             } else if (strncasecmp(line, "UP-WHL01", strlen("UP-WHL01") + 1) == 0) {
                 platform_type = MRAA_UPXTREME;
                 plat = mraa_upxtreme_board();
+            } else if (strncasecmp(line, "0d370eed-89ca-4dc0-a365-e9904c4c62bb", strlen("0d370eed-89ca-4dc0-a365-e9904c4c62bb") + 1) == 0) {
+                platform_type = MRAA_DELL_EGW_3200;
+                plat = mraa_dell_egw_3200();
+            } else if (strncasecmp(line, "DC1AL", strlen("DC1AL") + 1) == 0) {
+                platform_type = MRAA_PREMIO_DCO_1000;
+                plat = mraa_premio_dco_1000();
+            } else if (strncasecmp(line, "RC340/WC340", strlen("RC340/WC340") + 1) == 0) {
+                platform_type = MRAA_PREMIO_RCO_3400;
+                plat = mraa_premio_dco_1000();
             } else {
                 syslog(LOG_ERR, "Platform not supported, not initialising");
                 platform_type = MRAA_UNKNOWN_PLATFORM;

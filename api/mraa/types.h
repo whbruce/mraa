@@ -65,8 +65,11 @@ typedef enum {
     MRAA_ROCKPI4 = 20,              /**< Radxa ROCK PI 4 Models A/B/C */
     MRAA_ADLINK_IPI = 21,           /**< Adlink Industrial PI */
     MRAA_ADLINK_LEC_AL = 22,        /**< Adlink LEC-AL*/
-    MRAA_ADLINK_LEC_AL_AI = 23,        /**< Adlink LEC-AL*/
+    MRAA_ADLINK_LEC_AL_AI = 23,     /**< Adlink LEC-AL*/
     MRAA_UPXTREME = 24,             /**< The UPXTREME Board */
+    MRAA_DELL_EGW_3200 = 25,        /**< The Dell Edge Gateway */
+    MRAA_PREMIO_DCO_1000 = 26,      /**< Premio DCO-1000 */
+    MRAA_PREMIO_RCO_3400 = 27,      /**< Premio RCO-3400 */
     // USB platform extenders start at 256
     MRAA_FTDI_FT4222 = 256,         /**< FTDI FT4222 USB to i2c bridge */
 

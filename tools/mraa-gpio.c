@@ -68,7 +68,7 @@ list_platform_pins(uint8_t platform_offset)
             fprintf(stdout, "\n");
         }
     }
-    return pin_count;    
+    return pin_count;
 }
 
 int
@@ -94,7 +94,11 @@ gpio_set(int pin, int level, mraa_boolean_t raw)
         gpio = mraa_gpio_init(pin);
     }
     if (gpio != NULL) {
-        mraa_gpio_dir(gpio, MRAA_GPIO_OUT);
+        if (mraa_gpio_dir(gpio, MRAA_GPIO_OUT) != MRAA_SUCCESS) {
+            fprintf(stdout, "Could not set pin %d as output\n", pin);
+            mraa_gpio_close(gpio);
+            return MRAA_ERROR_INVALID_RESOURCE;
+        }
         if (raw != 0) {
             if (mraa_gpio_use_mmaped(gpio, 1) != MRAA_SUCCESS) {
                 fprintf(stdout,
@@ -112,7 +116,11 @@ gpio_get(int pin, int* level, mraa_boolean_t raw)
 {
     mraa_gpio_context gpio = mraa_gpio_init(pin);
     if (gpio != NULL) {
-        mraa_gpio_dir(gpio, MRAA_GPIO_IN);
+        if (mraa_gpio_dir(gpio, MRAA_GPIO_IN) != MRAA_SUCCESS) {
+            fprintf(stdout, "Could not set pin %d as input\n", pin);
+            mraa_gpio_close(gpio);
+            return MRAA_ERROR_INVALID_RESOURCE;
+        }
         if (raw != 0) {
             if (mraa_gpio_use_mmaped(gpio, 1) != MRAA_SUCCESS) {
                 fprintf(stdout,
